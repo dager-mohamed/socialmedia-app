@@ -1,19 +1,12 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
-import { IoIosArrowForward } from "react-icons/io";
 import logo from "../../assets/logo.svg";
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitaliza'
 const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitaliza'
 
-const categories = [
-    {name:'Animals'},
-    {name:'Wallpapers'},
-    {name:'Photography'},
-    {name:'Gaming'},
-    {name:'Coding'},
-]
+import { categories } from "../../utils/data";
 
 export function Sidebar(props: {
   user: any;
@@ -43,6 +36,7 @@ export function Sidebar(props: {
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">Discover categories</h3>
           {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink to={`/category/${category.name}`} className={(a) => a.isActive ? isActiveStyle : isNotActiveStyle} key={category.name}>
+                <img src={category.image} className="w-8 h-8 rounded-full shadow-sm" alt="category-image"/>
                 {category.name}
             </NavLink>
           ))}

@@ -15,8 +15,16 @@ export function Pin(props: { pin: any; className: string }) {
   const user = fetchUser();
 
   let alreadySaved = false;
-  if (props.pin.save.length == 0) alreadySaved = false;
-  else alreadySaved = true;
+  if(props.pin.save){
+    if (props.pin.save.length != 0){
+      alreadySaved = true;
+    }else if(!props.pin.save){
+      alreadySaved = false;
+    }else{
+      alreadySaved = false
+    }
+  }
+  else alreadySaved = false;
 
   const savePin = (id: any) => {
     if (!alreadySaved) {
@@ -82,7 +90,7 @@ export function Pin(props: { pin: any; className: string }) {
                   type="button"
                   className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
-                  {props.pin.save.length} Saved
+                  {props.pin.save ? props.pin.save.length: 0} Saved
                 </button>
               ) : (
                 <button
@@ -125,7 +133,7 @@ export function Pin(props: { pin: any; className: string }) {
           </div>
         )}
       </div>
-      <Link to={`user-profile/${props.pin.postedBy._id}`} className="flex gap-2 mt-2 items-center">
+      <Link to={`/user-profile/${props.pin.postedBy._id}`} className="flex gap-2 mt-2 items-center">
         <img className="w-8 h-8 rounded-full object-cover" src={props.pin.postedBy.image} alt="user-image" />
         <p className="font-semibold capitalize">{props.pin.postedBy.userName}</p>
       </Link>

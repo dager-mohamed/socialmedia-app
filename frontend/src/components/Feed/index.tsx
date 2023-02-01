@@ -9,7 +9,7 @@ import {Spinner} from '../Spinner'
 export function Feed(){
     const params = useParams()
     const [loading, setLoading] = useState(false)
-    const [pins, setPins] = useState(null)
+    const [pins, setPins] = useState<any>(null)
     const {categoryId} = useParams()
     useEffect(() => {
         setLoading(true)
@@ -29,6 +29,7 @@ export function Feed(){
         }
     },[categoryId])
     if(loading) return <Spinner message="We are adding new ideas to your feed!" />
+    if(!pins?.length) return <h2>No pins available</h2>
     return(
         <div>
             {pins && <MasonryLayout pins={pins} />}
